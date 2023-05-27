@@ -6,6 +6,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
+import Register from './Register';
 
 export default function Login({ status, canResetPassword }: { status?: string, canResetPassword: boolean }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -78,6 +79,8 @@ export default function Login({ status, canResetPassword }: { status?: string, c
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
+                    <Link href={route('register')} className="underline m-2 underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Need to Register?</Link>
+
                     {canResetPassword && (
                         <Link
                             href={route('password.request')}
