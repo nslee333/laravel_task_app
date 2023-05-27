@@ -1,13 +1,54 @@
 import { Link, Head } from '@inertiajs/react';
+import { Fragment } from 'react';
+
+const data: any[] = [
+  {
+    id: 0,
+    task: "do laundry"
+  },
+  {
+    id: 0,
+    task: "do laundry"
+  },
+  {
+    id: 0,
+    task: "do laundry"
+  },
+  {
+    id: 0,
+    task: "do laundry"
+  },
+  {
+    id: 0,
+    task: "do laundry"
+  },
+  {
+    id: 0,
+    task: "do laundry"
+  },
+]
 
 
 function displayTasks() {
+  // & Map out tasks from database for authenticated user.
+
+  const tasks = data.map((element, index) => {
+
+    return (
+      <Fragment key={index}>
+        <div className="flex justify-between text-3xl">
+          <div>{data[index].task}</div>
+          <button>&times;</button>
+        </div>
+      </Fragment>
+    )
+  });
 
 
   return (
     <>
       <div>
-        
+        {tasks}
       </div>
     </>
   );
