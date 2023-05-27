@@ -18,7 +18,7 @@ function displayTasks() {
 
 export default function TaskDashboard() {
   return (
-    <>
+    <div>
       <div className="bg-[#3f3f3f] h-screen text-white">
           <Head title="Task Dashboard" />
           <div className="bg-[#33333] h-[8rem] w-screen ">
@@ -27,12 +27,12 @@ export default function TaskDashboard() {
 
           <div className=" flex justify-center">
             <div className="bg-[#222] h-[80vh] w-1/2 rounded-md p-5">
-              
+              {displayTasks()}
             </div>
           </div>
 
 
       </div>
-    </>
+    </div>
   );
 }
