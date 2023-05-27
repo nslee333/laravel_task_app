@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome');
+    return Inertia::render('TaskDashboard');
 })->middleware('auth');
 
 Route::get('/dashboard', function () {
