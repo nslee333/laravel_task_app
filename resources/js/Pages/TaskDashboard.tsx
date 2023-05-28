@@ -1,5 +1,6 @@
 import { Link, Head } from '@inertiajs/react';
-import { Fragment } from 'react';
+import { Fragment, SyntheticEvent } from 'react';
+import { useState } from 'react';
 
 const data: any[] = [
   {
@@ -7,48 +8,50 @@ const data: any[] = [
     task: "do laundry"
   },
   {
-    id: 0,
+    id: 1,
     task: "do laundry"
   },
   {
-    id: 0,
+    id: 2,
     task: "do laundry"
   },
-  {
-    id: 0,
-    task: "do laundry"
-  },
-  {
-    id: 0,
-    task: "do laundry"
-  },
-  {
-    id: 0,
-    task: "do laundry"
-  },
+  // {
+  //   id: 3,
+  //   task: "do laundry"
+  // },
+  // {
+  //   id: 4,
+  //   task: "do laundry"
+  // },
+  // {
+  //   id: 5,
+  //   task: "do laundry"
+  // }
 ]
 
 
-function displayTasks() {
-  // & Map out tasks from database for authenticated user.
 
-  const tasks = data.map((element, index) => {
-
+function DisplayTasks({tasks, setTasks, deleteTask}: {tasks: any, setTasks: any, deleteTask: any}) { 
+  
+  const displayTasks = data.map((element, index) => {
+    console.log(tasks[index]);
+    console.log(tasks[index].task);
+    
     return (
       <Fragment key={index}>
-        <div className="flex justify-between text-3xl">
-          <div>{data[index].task}</div>
-          <button>&times;</button>
+        <div className="flex justify-between sm:text-3xl xs:text-sm">
+          <div>{tasks[index].task}</div>
+          <button onClick={e => deleteTask(e, index)}>&times;</button>
         </div>
       </Fragment>
     )
   });
-
-
+  
+  
   return (
     <>
       <div>
-        {tasks}
+        {displayTasks}
       </div>
     </>
   );
@@ -58,6 +61,25 @@ function displayTasks() {
 
 
 export default function TaskDashboard() {
+  
+  const [tasks, setTasks] = useState(data);
+  
+  
+  function deleteTask(e: SyntheticEvent, index: number) {
+    e.preventDefault();
+    console.log("deleteTask call");
+  
+    console.log(tasks);
+    const newTaskArray = tasks.splice(index, 1);
+    // console.log(newTaskArray)
+    setTasks(newTaskArray);
+    console.log(tasks);
+  }
+
+
+
+
+
   return (
     <div>
       <div className="bg-[#3f3f3f] h-screen text-white">
@@ -67,8 +89,8 @@ export default function TaskDashboard() {
           </div>
 
           <div className=" flex justify-center">
-            <div className="bg-[#222] h-[80vh] w-1/2 rounded-md p-5">
-              {displayTasks()}
+            <div className="bg-[#222] h-[80vh] sm:w-1/2 xs:w-7/8 rounded-md p-5">
+              <DisplayTasks tasks={tasks} setTasks={setTasks} deleteTask={deleteTask} />
             </div>
           </div>
 
