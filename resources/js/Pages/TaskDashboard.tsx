@@ -34,8 +34,9 @@ const data: any[] = [
 function DisplayTasks({tasks, setTasks, deleteTask}: {tasks: any, setTasks: any, deleteTask: any}) { 
   
   const displayTasks = data.map((element, index) => {
-    console.log(tasks[index]);
-    console.log(tasks[index].task);
+    // console.log(tasks[index], "tasks[index]");
+    // console.log(tasks[index].task, "tasks[index].task");
+    console.log(tasks[index], "dt tasks");
     
     return (
       <Fragment key={index}>
@@ -61,23 +62,39 @@ function DisplayTasks({tasks, setTasks, deleteTask}: {tasks: any, setTasks: any,
 
 
 export default function TaskDashboard() {
-  
+
   const [tasks, setTasks] = useState(data);
   
   
   function deleteTask(e: SyntheticEvent, index: number) {
     e.preventDefault();
-    console.log("deleteTask call");
-  
-    console.log(tasks);
-    const newTaskArray = tasks.splice(index, 1);
-    // console.log(newTaskArray)
-    setTasks(newTaskArray);
-    console.log(tasks);
+    
+    const arr = tasks;
+    
+    const newArr: any[] = [];
+    
+    console.log(arr, "arr")
+    
+    arr.forEach(element => {
+      newArr.push(element);
+    });
+    
+    console.log(newArr, "New arr");
+    newArr.splice(index, 1);
+    console.log(newArr, "newArr after splice");
+    
+
+    setTasks(newArr);
+    console.log(tasks, "Tasks");
+
+    
   }
 
-
-
+  // & Cannot delete any tasks with out crashing.
+  // ^ "caught TypeError: Cannot read properties of undefined (reading 'task')"
+  // * When deleted -> sometimes tasks[index] is undefined
+  
+  // TODO: Current issue => Tasks aren't deleting instantly
 
 
   return (
