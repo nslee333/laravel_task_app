@@ -1,5 +1,5 @@
 import { Link, Head } from '@inertiajs/react';
-import { Fragment, SyntheticEvent } from 'react';
+import { ChangeEvent, FormEvent, Fragment, SyntheticEvent } from 'react';
 import { useState } from 'react';
 
 const data: any[] = [
@@ -55,11 +55,37 @@ function DisplayTasks({tasks, deleteTask}: {tasks: any, deleteTask: any}) {
   );
 }
 
+function Input() {
+
+  return (
+    <div className="bg">
+      <form onChange={event => handleChange(event)}>
+
+        <input className="bg-[#333333] w-[100%] text-2xl rounded-md mb-5 text-red" id="task" type="text" placeholder="get bailey leaves..."></input>
+      </form>
+    </div>
+  );
+}
+
+
+function handleChange(event: ChangeEvent<HTMLInputElement>) {
+
+  const target = event.target;
+  console.log(target.value)
+
+  // & Stopped @ trying to correctly type e.target.value 
+
+  if (target) {
+    console.log(target);
+  }
+  
+}
+
 
 
 
 export default function TaskDashboard() {
-
+  
   const [tasks, setTasks] = useState(data);
   
   
@@ -83,16 +109,16 @@ export default function TaskDashboard() {
     <div>
       <div className="bg-[#3f3f3f] h-screen text-white">
           <Head title="Task Dashboard" />
-          <div className="bg-[#33333] h-[8rem] w-screen ">
+          <div className="h-[8rem] w-screen ">
             <Link href="/" className="">Logout</Link>
           </div>
 
           <div className=" flex justify-center">
-            <div className="bg-[#222] h-[80vh] sm:w-1/2 xs:w-7/8 rounded-md p-5">
+            <div className="bg-[#222] h-[80vh] sm:w-1/2 xs:w-7/8 rounded-md p-5 border-2 border-pink-500">
+              <Input />
               <DisplayTasks tasks={tasks} deleteTask={deleteTask} />
             </div>
           </div>
-
 
       </div>
     </div>
