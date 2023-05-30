@@ -59,7 +59,7 @@ function Input() {
 
   return (
     <div className="bg">
-      <form onChange={event => handleChange(event)}>
+      <form onSubmit={e => handleSubmit(e)}>
 
         <input className="bg-[#333333] w-[100%] text-2xl rounded-md mb-5 text-red" id="task" type="text" placeholder="get bailey leaves..."></input>
       </form>
@@ -68,15 +68,13 @@ function Input() {
 }
 
 
-function handleChange(event: ChangeEvent<HTMLInputElement>) {
+function handleSubmit(e: any) {
+  e.preventDefault();
 
-  const target = event.target;
-  console.log(target.value)
-
-  // & Stopped @ trying to correctly type e.target.value 
+  const target = e.target[0];
 
   if (target) {
-    console.log(target);
+    console.log(target.value);
   }
   
 }
