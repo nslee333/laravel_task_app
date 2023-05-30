@@ -31,7 +31,7 @@ const data: any[] = [
 
 
 
-function DisplayTasks({tasks, setTasks, deleteTask}: {tasks: any, setTasks: any, deleteTask: any}) { 
+function DisplayTasks({tasks, deleteTask}: {tasks: any, deleteTask: any}) { 
   
   const displayTasks = data.map((element, index) => {
     // console.log(tasks[index], "tasks[index]");
@@ -107,7 +107,7 @@ export default function TaskDashboard() {
 
           <div className=" flex justify-center">
             <div className="bg-[#222] h-[80vh] sm:w-1/2 xs:w-7/8 rounded-md p-5">
-              <DisplayTasks tasks={tasks} setTasks={setTasks} deleteTask={deleteTask} />
+              <DisplayTasks tasks={tasks} deleteTask={deleteTask} />
             </div>
           </div>
 
