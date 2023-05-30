@@ -15,36 +15,33 @@ const data: any[] = [
     id: 2,
     task: "do laundry"
   },
-  // {
-  //   id: 3,
-  //   task: "do laundry"
-  // },
-  // {
-  //   id: 4,
-  //   task: "do laundry"
-  // },
-  // {
-  //   id: 5,
-  //   task: "do laundry"
-  // }
+  {
+    id: 3,
+    task: "do laundry"
+  },
+  {
+    id: 4,
+    task: "do laundry"
+  },
+  {
+    id: 5,
+    task: "do laundry"
+  }
 ]
 
 
 
-function DisplayTasks({tasks, deleteTask}: {tasks: any, deleteTask: any}) { 
-  
+function DisplayTasks({tasks, deleteTask}: {tasks: any, deleteTask: any}) {   
   const displayTasks = data.map((element, index) => {
-    // console.log(tasks[index], "tasks[index]");
-    // console.log(tasks[index].task, "tasks[index].task");
-    console.log(tasks[index], "dt tasks");
     
     return (
+      tasks[index] ? 
       <Fragment key={index}>
         <div className="flex justify-between sm:text-3xl xs:text-sm">
           <div>{tasks[index].task}</div>
           <button onClick={e => deleteTask(e, index)}>&times;</button>
         </div>
-      </Fragment>
+      </Fragment> : <Fragment key={index}></Fragment>
     )
   });
   
@@ -68,33 +65,18 @@ export default function TaskDashboard() {
   
   function deleteTask(e: SyntheticEvent, index: number) {
     e.preventDefault();
-    
-    const arr = tasks;
-    
+        
     const newArr: any[] = [];
     
-    console.log(arr, "arr")
     
-    arr.forEach(element => {
+    tasks.forEach(element => {
       newArr.push(element);
     });
     
-    console.log(newArr, "New arr");
     newArr.splice(index, 1);
-    console.log(newArr, "newArr after splice");
     
-
-    setTasks(newArr);
-    console.log(tasks, "Tasks");
-
-    
+    setTasks(newArr);    
   }
-
-  // & Cannot delete any tasks with out crashing.
-  // ^ "caught TypeError: Cannot read properties of undefined (reading 'task')"
-  // * When deleted -> sometimes tasks[index] is undefined
-  
-  // TODO: Current issue => Tasks aren't deleting instantly
 
 
   return (
