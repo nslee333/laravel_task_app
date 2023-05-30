@@ -55,51 +55,90 @@ function DisplayTasks({tasks, deleteTask}: {tasks: any, deleteTask: any}) {
   );
 }
 
-function Input() {
+function Input({ addTask }) {
 
+  function handleSubmit(e: any) {
+    e.preventDefault();
+  
+    const target = e.target[0];
+  
+    if (target) {
+      // console.log(target.value);
+      addTask(target.value);
+    }
+    
+  }
+  
   return (
     <div className="bg">
       <form onSubmit={e => handleSubmit(e)}>
 
-        <input className="bg-[#333333] w-[100%] text-2xl rounded-md mb-5 text-red" id="task" type="text" placeholder="get bailey leaves..."></input>
+        <input className="bg-[#333333] w-[100%] text-2xl rounded-md mb-5 text-red" 
+                id="task" 
+                type="text" 
+                placeholder="get bailey leaves..."
+        >
+
+        </input>
       </form>
     </div>
   );
 }
 
 
-function handleSubmit(e: any) {
-  e.preventDefault();
-
-  const target = e.target[0];
-
-  if (target) {
-    console.log(target.value);
-  }
-  
-}
-
 
 
 
 export default function TaskDashboard() {
-  
   const [tasks, setTasks] = useState(data);
+  const [draft, setDraft] = useState("");
+
+  function extractTasks(): any[] {
+    let newArr = [];
+    
+    if (!tasks) return [];
+
+    tasks.forEach(element => {
+      newArr.push(element);
+    });
+    
+    return newArr;
+  }
   
   
   function deleteTask(e: SyntheticEvent, index: number) {
     e.preventDefault();
         
-    const newArr: any[] = [];
-    
-    
-    tasks.forEach(element => {
-      newArr.push(element);
-    });
+    const newArr = extractTasks();
     
     newArr.splice(index, 1);
     
-    setTasks(newArr);    
+    setTasks(newArr);
+  }
+
+  function addTask(draft: string) {
+
+    if (draft.length === 0) return;
+
+    setDraft(draft)
+
+    const newArr = extractTasks();
+
+    if (tasks && tasks.length > 0) {
+      newArr.push({
+        id: tasks[tasks.length - 1].id + 1,
+        task: draft
+      });
+    } else {
+      newArr.push({
+        id: tasks[tasks.length].id + 1,
+        task: draft
+      });
+      
+    }
+
+    setTasks(newArr);
+    setDraft("");
   }
 
 
@@ -113,7 +152,7 @@ export default function TaskDashboard() {
 
           <div className=" flex justify-center">
             <div className="bg-[#222] h-[80vh] sm:w-1/2 xs:w-7/8 rounded-md p-5 border-2 border-pink-500">
-              <Input />
+              <Input addTask={addTask} />
               <DisplayTasks tasks={tasks} deleteTask={deleteTask} />
             </div>
           </div>
