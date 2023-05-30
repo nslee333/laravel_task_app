@@ -1,5 +1,5 @@
 import { Link, Head } from '@inertiajs/react';
-import { ChangeEvent, FormEvent, Fragment, SyntheticEvent } from 'react';
+import { Fragment, SyntheticEvent } from 'react';
 import { useState } from 'react';
 
 const data: any[] = [
