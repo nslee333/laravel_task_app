@@ -52,7 +52,13 @@ const Input = forwardRef(function Input(props: {addTask: any}, ref) {
     <div className="bg">
       <form onSubmit={e => handleSubmit(e)}>
 
-        <input className="bg-[#333333] w-[100%] text-2xl rounded-md mb-5 text-red" 
+        <input className="bg-[#333333] 
+                w-[100%] 
+                text-2xl 
+                rounded-md 
+                mb-5
+                
+                " 
                 id="task" 
                 type="text" 
                 placeholder="get bailey leaves..."
@@ -98,6 +104,7 @@ export default function TaskDashboard() {
   // TODO |> We're adding tasks but the component isn't re-rendering.
 
   // TODO |> Clear input field when done.
+
   function addTask(draft: string) {
 
     if (draft.length === 0) return;
