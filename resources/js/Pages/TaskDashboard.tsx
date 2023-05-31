@@ -1,47 +1,134 @@
 import { Link, Head } from '@inertiajs/react';
-import { Fragment, SyntheticEvent } from 'react';
-import { useState } from 'react';
+import { Fragment, MutableRefObject, SyntheticEvent, useRef } from 'react';
+import { useState, forwardRef } from 'react';
 
-const data: any[] = [
-  {
-    id: 0,
-    task: "do laundry"
-  },
-  {
-    id: 1,
-    task: "do laundry"
-  },
-  {
-    id: 2,
-    task: "do laundry"
-  },
-  {
-    id: 3,
-    task: "do laundry"
-  },
-  {
-    id: 4,
-    task: "do laundry"
-  },
-  {
-    id: 5,
-    task: "do laundry"
-  }
-]
+// const data: any[] = [
+//   {
+//     id: 0,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 1,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 2,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 3,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 4,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 5,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 3,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 4,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 5,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 3,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 4,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 5,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 3,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 4,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 5,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 3,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 4,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 5,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 3,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 4,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 5,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 3,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 4,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 5,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 3,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 4,
+//     task: "do laundry"
+//   },
+//   {
+//     id: 5,
+//     task: "do laundry"
+//   },
+// ]
 
-
+const data = [];
 
 function DisplayTasks({tasks, deleteTask}: {tasks: any, deleteTask: any}) {   
+
+  console.log(tasks);
+
   const displayTasks = data.map((element, index) => {
-    
+    if (!tasks) return;
+
     return (
-      tasks[index] ? 
       <Fragment key={index}>
         <div className="flex justify-between sm:text-3xl xs:text-sm">
           <div>{tasks[index].task}</div>
           <button onClick={e => deleteTask(e, index)}>&times;</button>
         </div>
-      </Fragment> : <Fragment key={index}></Fragment>
+      </Fragment>
     )
   });
   
@@ -55,15 +142,18 @@ function DisplayTasks({tasks, deleteTask}: {tasks: any, deleteTask: any}) {
   );
 }
 
-function Input({ addTask }) {
 
+
+const Input = forwardRef(function Input(props: {addTask: any}, ref) {
+  const inputRef = ref as MutableRefObject<HTMLInputElement>;
+  
   function handleSubmit(e: any) {
+    const {addTask} = props;
     e.preventDefault();
   
     const target = e.target[0];
   
     if (target) {
-      // console.log(target.value);
       addTask(target.value);
     }
     
@@ -77,21 +167,21 @@ function Input({ addTask }) {
                 id="task" 
                 type="text" 
                 placeholder="get bailey leaves..."
+                ref={inputRef}
         >
 
         </input>
       </form>
     </div>
   );
-}
-
-
+});
 
 
 
 export default function TaskDashboard() {
   const [tasks, setTasks] = useState(data);
   const [draft, setDraft] = useState("");
+  const inputRef = useRef("");
 
   function extractTasks(): any[] {
     let newArr = [];
@@ -117,6 +207,9 @@ export default function TaskDashboard() {
   }
 
   function addTask(draft: string) {
+    // TODO |> We're adding tasks but the component isn't re-rendering.
+
+    // TODO |> Clear input field when done.
 
     if (draft.length === 0) return;
 
@@ -131,14 +224,20 @@ export default function TaskDashboard() {
       });
     } else {
       newArr.push({
-        id: tasks[tasks.length].id + 1,
+        id: 0,
         task: draft
       });
       
     }
 
+    console.log(tasks)
+    console.log(draft)
+    
     setTasks(newArr);
     setDraft("");
+    inputRef.current = "";
+    console.log(tasks)
+    console.log(newArr)
   }
 
 
@@ -152,7 +251,7 @@ export default function TaskDashboard() {
 
           <div className=" flex justify-center">
             <div className="bg-[#222] h-[80vh] sm:w-1/2 xs:w-7/8 rounded-md p-5 border-2 border-pink-500">
-              <Input addTask={addTask} />
+              <Input addTask={addTask} ref={inputRef} />
               <DisplayTasks tasks={tasks} deleteTask={deleteTask} />
             </div>
           </div>
