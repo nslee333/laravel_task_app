@@ -94,11 +94,11 @@ export default function TaskDashboard() {
     
     setTasks(newArr);
   }
+  
+  // TODO |> We're adding tasks but the component isn't re-rendering.
 
+  // TODO |> Clear input field when done.
   function addTask(draft: string) {
-    // TODO |> We're adding tasks but the component isn't re-rendering.
-
-    // TODO |> Clear input field when done.
 
     if (draft.length === 0) return;
 
@@ -118,7 +118,6 @@ export default function TaskDashboard() {
       });
       
     }
-
     console.log(tasks)
     console.log(draft)
     
