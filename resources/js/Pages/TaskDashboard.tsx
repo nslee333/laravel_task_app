@@ -131,14 +131,14 @@ export default function TaskDashboard() {
 
   return (
     <div>
-      <div className="bg-[#3f3f3f] h-screen text-white">
+      <div className="bg-[#3f3f3f] min-h-[100vh] text-white">
           <Head title="Task Dashboard" />
           <div className="h-[8rem] w-screen ">
             <Link href="/" className="">Logout</Link>
           </div>
 
           <div className=" flex justify-center">
-            <div className="bg-[#222] h-[80vh] sm:w-1/2 xs:w-7/8 rounded-md p-5 border-2 border-pink-500">
+            <div className="bg-[#222] h-[80vh] overflow-auto sm:w-1/2 xs:w-7/8 rounded-md p-5 mb-10 border-2 border-pink-500">
               <Input addTask={addTask} ref={inputRef} />
               <DisplayTasks tasks={tasks} deleteTask={deleteTask} />
             </div>
