@@ -30,7 +30,6 @@ function DisplayTasks({tasks, deleteTask}: {tasks: any, deleteTask: any}) {
 }
 
 
-
 const Input = forwardRef(function Input(props: {addTask: any}, ref) {
   const inputRef = ref as MutableRefObject<HTMLInputElement>;
   
@@ -61,9 +60,7 @@ const Input = forwardRef(function Input(props: {addTask: any}, ref) {
                 type="text" 
                 placeholder="get bailey leaves..."
                 ref={inputRef}
-        >
-
-        </input>
+        />
       </form>
     </div>
   );
@@ -116,6 +113,7 @@ export default function TaskDashboard() {
         id: tasks[tasks.length - 1].id + 1,
         task: draft
       });
+      
     } else {
       newArr.push({
         id: 0,
