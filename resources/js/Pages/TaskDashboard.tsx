@@ -6,9 +6,7 @@ import {data} from "./data";
 
 function DisplayTasks({tasks, deleteTask}: {tasks: any, deleteTask: any}) {   
 
-  console.log(tasks);
-
-  const displayTasks = data.map((element, index) => {
+  const displayTasks = tasks.map((element, index) => {
     if (!tasks) return;
 
     return (
