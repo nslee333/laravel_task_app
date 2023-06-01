@@ -21,6 +21,18 @@ Route::get('/', function () {
     return Inertia::render('TaskDashboard');
 })->middleware('auth');
 
+Route::get("/tasks", function () {
+    // TODO get tasks.
+})->middleware('auth');
+
+Route::get("/tasks", function() {
+    // TODO Add task
+});
+
+Route::get("/tasks", function() {
+    // TODO delete task
+});
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
