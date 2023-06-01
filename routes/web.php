@@ -29,10 +29,12 @@ Route::get('/', function () {
 
 })->middleware('auth');
 
+// ^ this group of routes might be completely unnecessary.
+
 Route::middleware('auth')->group(function () {
-    Route::get("/tasks", [TaskController::class, 'get_task']);
-    Route::patch("/tasks", [TaskController::class, 'add_task']);
-    Route::delete("/tasks", [TaskController::class, 'delete_task']);
+    Route::get("/tasks", [TaskController::class, 'get_task'])->name("tasks.get");
+    Route::patch("/tasks", [TaskController::class, 'add_task'])->name("tasks.add");
+    Route::delete("/tasks", [TaskController::class, 'delete_task'])->name("tasks.delete");
 });
 
 Route::get('/dashboard', function () {
