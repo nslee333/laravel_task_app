@@ -10,22 +10,15 @@ class TaskController extends Controller
 {
     function get_tasks()
     {
-        // & Grab the current user.
         $user = new User;
 
-        // ^ I need to test this -> But I need to find a way to access this.
-
-        // TODO Maybe we need a auth route to call the taskController for these methods 
         $auth_user = Auth::user();
 
-        $tasks = $user::find($auth_user)->tasks;
+        $user_entry = $user::find($auth_user);
+
+        $tasks = $user_entry[0]->tasks;
 
         return $tasks;
-
-
-        // & $tasks = $user->tasks;
-
-        // & return tasks to caller.
     }
 
     function add_task() // * Add param for new task

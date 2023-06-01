@@ -6,7 +6,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Http;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +19,14 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return Inertia::render('TaskDashboard');
+    $task_controller = new TaskController;
+
+    $tasks = $task_controller->get_tasks();
+
+    return Inertia::render('TaskDashboard', [
+        'data' => $tasks
+    ]);
+
 })->middleware('auth');
 
 Route::middleware('auth')->group(function () {
