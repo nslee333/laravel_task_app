@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 class TaskController extends Controller
@@ -10,7 +11,17 @@ class TaskController extends Controller
     function get_tasks()
     {
         // & Grab the current user.
-        $user = User::find();
+        $user = new User;
+
+        // ^ I need to test this -> But I need to find a way to access this.
+
+        // TODO Maybe we need a auth route to call the taskController for these methods 
+        $auth_user = Auth::user();
+
+        $tasks = $user::find($auth_user)->tasks;
+
+        return $tasks;
+
 
         // & $tasks = $user->tasks;
 
