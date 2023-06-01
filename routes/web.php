@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -21,16 +22,10 @@ Route::get('/', function () {
     return Inertia::render('TaskDashboard');
 })->middleware('auth');
 
-Route::get("/tasks", function () {
-    // TODO get tasks.
-})->middleware('auth');
-
-Route::get("/tasks", function() {
-    // TODO Add task
-});
-
-Route::get("/tasks", function() {
-    // TODO delete task
+Route::middleware('auth')->group(function () {
+    Route::get("/tasks", [TaskController::class, 'get_task']);
+    Route::patch("/tasks", [TaskController::class, 'add_task']);
+    Route::delete("/tasks", [TaskController::class, 'delete_task']);
 });
 
 Route::get('/dashboard', function () {
