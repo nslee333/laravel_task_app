@@ -62,8 +62,11 @@ function Input(props: { addTask: any; draft: any; setDraft }) {
     );
 }
 
-export default function TaskDashboard() {
-    const [tasks, setTasks] = useState(data);
+export default function TaskDashboard(jsonTasks: any) {
+
+    const parsedTasks = JSON.parse(jsonTasks.data)
+
+    const [tasks, setTasks] = useState(parsedTasks);
     const [draft, setDraft] = useState("");
 
     function extractTasks(): any[] {
