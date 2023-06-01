@@ -1,7 +1,8 @@
 import { Link, Head } from '@inertiajs/react';
-import { Fragment, MutableRefObject, SyntheticEvent, useRef } from 'react';
-import { useState, forwardRef } from 'react';
+import { Fragment, SyntheticEvent } from 'react';
+import { useState} from 'react';
 import {data} from "./data";
+
 
 
 function DisplayTasks({tasks, deleteTask}: {tasks: any, deleteTask: any}) {   
@@ -30,8 +31,8 @@ function DisplayTasks({tasks, deleteTask}: {tasks: any, deleteTask: any}) {
 }
 
 
-const Input = forwardRef(function Input(props: {addTask: any}, ref) {
-  const inputRef = ref as MutableRefObject<HTMLInputElement>;
+function Input(props: {addTask: any, draft: any, setDraft}) {  
+  const {draft, setDraft} = props;
   
   function handleSubmit(e: any) {
     const {addTask} = props;
@@ -59,19 +60,19 @@ const Input = forwardRef(function Input(props: {addTask: any}, ref) {
                 id="task" 
                 type="text" 
                 placeholder="get bailey leaves..."
-                ref={inputRef}
+                onChange={e => setDraft(e.target.value)}
+                value={draft}
         />
       </form>
     </div>
   );
-});
+};
 
 
 
 export default function TaskDashboard() {
   const [tasks, setTasks] = useState(data);
   const [draft, setDraft] = useState("");
-  const inputRef = useRef("");
 
   function extractTasks(): any[] {
     let newArr = [];
@@ -95,16 +96,11 @@ export default function TaskDashboard() {
     
     setTasks(newArr);
   }
-  
-  // TODO |> We're adding tasks but the component isn't re-rendering.
 
-  // TODO |> Clear input field when done.
+  function addTask(draftParam: string) {
+    if (draftParam.length === 0) return;
 
-  function addTask(draft: string) {
-
-    if (draft.length === 0) return;
-
-    setDraft(draft)
+    setDraft(draftParam);
 
     const newArr = extractTasks();
 
@@ -113,7 +109,7 @@ export default function TaskDashboard() {
         id: tasks[tasks.length - 1].id + 1,
         task: draft
       });
-      
+
     } else {
       newArr.push({
         id: 0,
@@ -121,14 +117,9 @@ export default function TaskDashboard() {
       });
       
     }
-    console.log(tasks)
-    console.log(draft)
     
     setTasks(newArr);
-    setDraft("");
-    inputRef.current = "";
-    console.log(tasks)
-    console.log(newArr)
+    setDraft("")
   }
 
 
@@ -142,7 +133,7 @@ export default function TaskDashboard() {
 
           <div className=" flex justify-center">
             <div className="bg-[#222] h-[80vh] overflow-auto sm:w-1/2 xs:w-7/8 rounded-md p-5 mb-10 border-2 border-pink-500">
-              <Input addTask={addTask} ref={inputRef} />
+              <Input addTask={addTask} draft={draft} setDraft={setDraft}/>
               <DisplayTasks tasks={tasks} deleteTask={deleteTask} />
             </div>
           </div>
