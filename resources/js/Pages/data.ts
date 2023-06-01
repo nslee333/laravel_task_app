@@ -1,10 +1,3 @@
-
-
-
-// ^ LOA -> Simplifying data structure here, then fixing the react code.
-
-
-
 export const data = ["do laundry", "help fred with mowing his lawn", "huh??"];
 
 // export const data = [
