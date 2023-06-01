@@ -10,7 +10,7 @@ function DisplayTasks({ tasks, deleteTask }: { tasks: any; deleteTask: any }) {
         return (
             <Fragment key={index}>
                 <div className="flex justify-between sm:text-3xl xs:text-sm">
-                    <div>{tasks[index].task}</div>
+                    <div>{tasks[index]}</div>
                     <button onClick={(e) => deleteTask(e, index)}>
                         &times;
                     </button>
@@ -94,18 +94,7 @@ export default function TaskDashboard() {
         setDraft(draftParam);
 
         const newArr = extractTasks();
-
-        if (tasks && tasks.length > 0) {
-            newArr.push({
-                id: tasks[tasks.length - 1].id + 1,
-                task: draft,
-            });
-        } else {
-            newArr.push({
-                id: 0,
-                task: draft,
-            });
-        }
+        newArr.push(draftParam);
 
         setTasks(newArr);
         setDraft("");

@@ -1,113 +1,121 @@
 
 
-export const data = [
-    // {
-    //   id: 0,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 1,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 2,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 3,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 4,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 5,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 3,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 4,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 5,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 3,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 4,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 5,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 3,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 4,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 5,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 3,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 4,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 5,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 3,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 4,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 5,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 3,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 4,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 5,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 3,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 4,
-    //   task: "do laundry"
-    // },
-    // {
-    //   id: 5,
-    //   task: "do laundry"
-    // },
-  ]
+
+// ^ LOA -> Simplifying data structure here, then fixing the react code.
+
+
+
+export const data = ["do laundry", "help fred with mowing his lawn", "huh??"];
+
+// export const data = [
+//     {
+//       id: 0,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 1,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 2,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 3,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 4,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 5,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 3,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 4,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 5,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 3,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 4,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 5,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 3,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 4,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 5,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 3,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 4,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 5,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 3,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 4,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 5,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 3,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 4,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 5,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 3,
+//       task: "do laundry"
+//     },
+//     {
+//       id: 4,
+//       task: "do laundry"
+//     },
+//     {
+  //       id: 5,
+  //       task: "do laundry"
+  //     },
+  //   ]
+  
   
