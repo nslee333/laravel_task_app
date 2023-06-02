@@ -2,7 +2,7 @@ import axios from "axios";
 import { AxiosResponse, AxiosError } from "axios";
 
 
-async function getTasksReq(): Promise<AxiosResponse | AxiosError> {
+async function getTasksReq() {
 
   const getResponse = await axios.get('/tasks')
     .then(function(response) {
@@ -15,7 +15,7 @@ async function getTasksReq(): Promise<AxiosResponse | AxiosError> {
   return getResponse;
 }
 
-async function addTaskReq(newTask: string): Promise<AxiosResponse | AxiosError> {
+async function addTaskReq(newTask: string) {
 
   const addResponse = await axios.post("/tasks", {
     new_task: newTask
@@ -30,7 +30,7 @@ async function addTaskReq(newTask: string): Promise<AxiosResponse | AxiosError> 
     return addResponse;
 }
 
-async function deleteTaskReq(taskIndex: number): Promise<AxiosResponse | AxiosError> {
+async function deleteTaskReq(taskIndex: number) {
 
   const deleteResponse = await axios.delete("tasks", { data: {
       task_index: taskIndex
