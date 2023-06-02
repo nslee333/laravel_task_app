@@ -69,18 +69,6 @@ export default function TaskDashboard(jsonTasks: any) {
 
     const [tasks, setTasks] = useState(parsedTasks);
     const [draft, setDraft] = useState("");
-
-    // function extractTasks(): any[] {
-    //     let newArr = [];
-
-    //     if (!tasks) return [];
-
-    //     tasks.forEach((element) => {
-    //         newArr.push(element);
-    //     });
-
-    //     return newArr;
-    // }
     
     async function addTask(draftParam: string) {
         if (draftParam.length === 0) return;
@@ -97,9 +85,6 @@ export default function TaskDashboard(jsonTasks: any) {
             console.log(response);
         }
 
-        
-
-        
         const newTasksRes = await getTasksReq();
         
         if (newTasksRes instanceof AxiosError) {
@@ -111,20 +96,6 @@ export default function TaskDashboard(jsonTasks: any) {
         
         setDraft("");
         setTasks(newTasksRes.data);
-
-
-
-
-
-
-
-
-        // TODO IF  Call get_tasks after update IF react dosen't update.
-
-        // const newArr = extractTasks();
-        // newArr.push(draftParam);
-
-        // setTasks(newArr);
     }
 
     function deleteTask(e: SyntheticEvent, index: number) {
