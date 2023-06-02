@@ -27,13 +27,11 @@ class TaskController extends Controller
         $user_entry = User::find($auth_user)[0];
         $tasks = $user_entry->tasks;
 
-
         $decoded_tasks = json_decode($tasks);
-        $decoded_tasks[] = $new_task;
-        $new_encoded_array = json_encode($decoded_tasks);
 
-        // $tasks = $new_encoded_array; // ? Why does this not work?
-        $user_entry->tasks = $new_encoded_array;
+        $decoded_tasks[] = $new_task;
+        
+        $user_entry->tasks = $decoded_tasks;
 
         return $user_entry->save();
     }
@@ -46,23 +44,10 @@ class TaskController extends Controller
 
         $decoded_tasks = json_decode($tasks);
 
-        // return gettype($task_index);
-        // return $task_index;
+        unset($decoded_tasks[$task_index]);
 
-        return $decoded_tasks;
+        $user_entry->tasks = $decoded_tasks;
 
-        // ! Stopped at trying to debug this crap :)
-
-        // return $decoded_tasks[$task_index];
-
-        // unset($decoded_tasks[$task_index]);
-
-        // // ! Cannot use object of type stdClass as array
-
-        // $encoded_tasks = json_encode($decoded_tasks);
-
-        // $user_entry->tasks = $encoded_tasks;
-
-        // $user_entry->save();
+        $user_entry->save();
     }
 }
