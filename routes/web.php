@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\App;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,12 +30,25 @@ Route::get('/', function () {
 
 })->middleware('auth');
 
-// ^ this group of routes might be completely unnecessary.
+// ? this group of routes might be completely unnecessary.
+
+// ^ delete tasks => Need to pass task[index] to function.
 
 Route::middleware('auth')->group(function () {
-    Route::get("/tasks", [TaskController::class, 'get_task'])->name("tasks.get");
     Route::patch("/tasks", [TaskController::class, 'add_task'])->name("tasks.add");
-    Route::delete("/tasks", [TaskController::class, 'delete_task'])->name("tasks.delete");
+
+    // Route::delete("/tasks", [
+    //     data: {
+
+    //     }, 
+    //     TaskController::class, 'delete_task'
+    // ])->name("tasks.delete");
+
+    Route::delete("/tasks", function() {
+        $tasks = "Do Laundry";
+
+        return App::call("TaskController@add_task", ["tasks" => $tasks]);
+    });
 });
 
 Route::get('/dashboard', function () {
