@@ -1,7 +1,6 @@
 import { Link, Head } from "@inertiajs/react";
 import { Fragment, SyntheticEvent } from "react";
 import { useState } from "react";
-import { data } from "./data";
 
 function DisplayTasks({ tasks, deleteTask }: { tasks: any; deleteTask: any }) {
     const displayTasks = tasks.map((element, index) => {
