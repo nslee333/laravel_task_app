@@ -1,6 +1,7 @@
 import { Link, Head } from "@inertiajs/react";
 import { Fragment, SyntheticEvent } from "react";
 import { useState } from "react";
+import { addTask, getTasks, deleteTask } from "./requests";
 
 function DisplayTasks({ tasks, deleteTask }: { tasks: any; deleteTask: any }) {
     const displayTasks = tasks.map((element, index) => {
@@ -68,39 +69,44 @@ export default function TaskDashboard(jsonTasks: any) {
     const [tasks, setTasks] = useState(parsedTasks);
     const [draft, setDraft] = useState("");
 
-    function extractTasks(): any[] {
-        let newArr = [];
+    // function extractTasks(): any[] {
+    //     let newArr = [];
 
-        if (!tasks) return [];
+    //     if (!tasks) return [];
 
-        tasks.forEach((element) => {
-            newArr.push(element);
-        });
+    //     tasks.forEach((element) => {
+    //         newArr.push(element);
+    //     });
 
-        return newArr;
-    }
-
-    function deleteTask(e: SyntheticEvent, index: number) {
-        e.preventDefault();
-
-        const newArr = extractTasks();
-
-        newArr.splice(index, 1);
-
-        setTasks(newArr);
-    }
-
+    //     return newArr;
+    // }
+    
     function addTask(draftParam: string) {
         if (draftParam.length === 0) return;
 
         setDraft(draftParam);
 
-        const newArr = extractTasks();
-        newArr.push(draftParam);
+        // TODO Call add_task with draft
 
-        setTasks(newArr);
+        // TODO Call get_tasks after update.
+
+        // const newArr = extractTasks();
+        // newArr.push(draftParam);
+
+        // setTasks(newArr);
         setDraft("");
     }
+
+    function deleteTask(e: SyntheticEvent, index: number) {
+        e.preventDefault();
+
+        // const newArr = extractTasks();
+
+        // newArr.splice(index, 1);
+
+        // setTasks(newArr);
+    }
+
 
     return (
         <div>
