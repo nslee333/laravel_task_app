@@ -25,26 +25,17 @@ class TaskController extends Controller
     {
         $auth_user = Auth::user();
         $user_entry = User::find($auth_user)[0];
-
-        // return $user_entry;
-
         $tasks = $user_entry->tasks;
         
+
         $decoded_tasks = json_decode($tasks);
-        
-        
-        // * No errors now - but database isn't updating why? 
-
         $decoded_tasks[] = $new_task;
-
         $new_encoded_array = json_encode($decoded_tasks);
 
-        $tasks = $new_encoded_array;
+        // $tasks = $new_encoded_array;
+        $user_entry->tasks = $new_encoded_array;
 
-        return $user_entry->save(); // * <- true [1] returned? But not updating?
-
-        // return $user_entry;
-
+        return $user_entry->save();
     }
 
     function delete_task() // * index param -> task to be deleted.
