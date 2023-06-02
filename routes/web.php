@@ -28,20 +28,20 @@ Route::get('/', function () {
     return Inertia::render('TaskDashboard', [
         'data' => $tasks
     ]);
-
 })->middleware('auth');
 
-Route::middleware('auth')->group(function () { 
+
+Route::middleware('auth')->group(function () {
 
     Route::get("/tasks", [TaskController::class, 'get_tasks']);
-    
-    Route::post("/tasks", function(Request $request) {
+
+    Route::post("/tasks", function (Request $request) {
         $task = $request->input('new_task');
-        
+
         return App::call("App\Http\Controllers\TaskController@add_task", ["new_task" => $task]);
     });
-    
-    
+
+
     Route::delete("/tasks", function (Request $request) {
         $task_index = $request->input("task_index");
 
@@ -59,4 +59,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
