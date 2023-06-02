@@ -26,7 +26,7 @@ class TaskController extends Controller
         $auth_user = Auth::user();
         $user_entry = User::find($auth_user)[0];
         $tasks = $user_entry->tasks;
-        
+
 
         $decoded_tasks = json_decode($tasks);
         $decoded_tasks[] = $new_task;
@@ -38,7 +38,7 @@ class TaskController extends Controller
         return $user_entry->save();
     }
 
-    function delete_task(int $task_index) // * index param -> task to be deleted.
+    function delete_task(mixed $task_index)
     {
         $auth_user = Auth::user();
         $user_entry = User::find($auth_user)[0];
@@ -46,12 +46,23 @@ class TaskController extends Controller
 
         $decoded_tasks = json_decode($tasks);
 
-        unset($decoded_tasks[$task_index]);
+        // return gettype($task_index);
+        // return $task_index;
 
-        $encoded_tasks = json_encode($decoded_tasks);
+        return $decoded_tasks;
 
-        $user_entry->tasks = $encoded_tasks;
+        // ! Stopped at trying to debug this crap :)
 
-        $user_entry->save();
+        // return $decoded_tasks[$task_index];
+
+        // unset($decoded_tasks[$task_index]);
+
+        // // ! Cannot use object of type stdClass as array
+
+        // $encoded_tasks = json_encode($decoded_tasks);
+
+        // $user_entry->tasks = $encoded_tasks;
+
+        // $user_entry->save();
     }
 }

@@ -63,11 +63,16 @@ function Input(props: { addTask: any; draft: any; setDraft }) {
     );
 }
 
-export default function TaskDashboard(jsonTasks: any) {
+export default function TaskDashboard(jsonData: any) {
 
-    const parsedTasks = JSON.parse(jsonTasks.data)
+    const parsedTasks = JSON.parse(jsonData.data);
+    const taskArray = Object.values(parsedTasks); 
+    // const parsedTasks = jsonData.data;
+    // console.log(parsedTasks)
+    // console.log(taskArray)
 
-    const [tasks, setTasks] = useState(parsedTasks);
+    const [tasks, setTasks] = useState(taskArray);
+    // const [tasks, setTasks] = useState(parsedTasks);
     const [draft, setDraft] = useState("");
     
     async function addTask(draftParam: string) {
@@ -92,20 +97,40 @@ export default function TaskDashboard(jsonTasks: any) {
             console.log(newTasksRes.response.data.message);
         } else {
             console.log(newTasksRes);
+            console.log(newTasksRes.response.data);
         }
         
         setDraft("");
         setTasks(newTasksRes.data);
     }
 
-    function deleteTask(e: SyntheticEvent, index: number) {
+    async function deleteTask(e: SyntheticEvent, index: number) {
         e.preventDefault();
 
-        // const newArr = extractTasks();
+        // console.log("hi?")
 
-        // newArr.splice(index, 1);
+        const deleteRes = await deleteTaskReq(index);
 
-        // setTasks(newArr);
+        if (deleteRes instanceof AxiosError) {
+            console.log(deleteRes);
+            console.log(deleteRes.response.data.message);
+        } else {
+            console.log(deleteRes);
+        }
+
+        const getRes = await getTasksReq();
+
+        if (getRes instanceof AxiosError) {
+            console.log(getRes);
+            console.log(getRes.response.data.message);
+        } else {
+            console.log(getRes);
+        }
+
+        const taskArr = Object.values(getRes.data); // ! BandAID!!!! 
+
+        // setTasks(getRes.data);  // ! BANDAID
+        setTasks(taskArr);
     }
 
 
