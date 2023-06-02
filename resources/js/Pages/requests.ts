@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-function getTasks() {
+function getTasksReq() {
 
   const getResponse = axios.get('/tasks')
     .then(function(response) {
@@ -14,7 +14,7 @@ function getTasks() {
   return getResponse;
 }
 
-function addTask(newTask: string) {
+function addTaskReq(newTask: string) {
 
   const addResponse = axios.post("/tasks", {
     new_task: newTask
@@ -29,7 +29,7 @@ function addTask(newTask: string) {
     return addResponse;
 }
 
-function deleteTask(taskIndex: number) {
+function deleteTaskReq(taskIndex: number) {
 
   const deleteResponse = axios.delete("tasks", { data: {
       task_index: taskIndex
@@ -44,4 +44,4 @@ function deleteTask(taskIndex: number) {
   return deleteResponse;
 }
 
-export { getTasks, addTask, deleteTask };
+export { getTasksReq, addTaskReq, deleteTaskReq };

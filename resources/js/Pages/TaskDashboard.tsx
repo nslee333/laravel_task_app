@@ -1,7 +1,7 @@
 import { Link, Head } from "@inertiajs/react";
 import { Fragment, SyntheticEvent } from "react";
 import { useState } from "react";
-import { addTask, getTasks, deleteTask } from "./requests";
+import { addTaskReq, getTasksReq, deleteTaskReq } from "./requests";
 
 function DisplayTasks({ tasks, deleteTask }: { tasks: any; deleteTask: any }) {
     const displayTasks = tasks.map((element, index) => {
@@ -62,7 +62,7 @@ function Input(props: { addTask: any; draft: any; setDraft }) {
     );
 }
 
-export default function TaskDashboard(jsonTasks: any) {
+export default function TaskDashboard(jsonTasks: any, addTaskReq: any, getTasksReq: any, deleteTaskReq: any) {
 
     const parsedTasks = JSON.parse(jsonTasks.data)
 
