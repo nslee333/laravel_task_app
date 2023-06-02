@@ -21,18 +21,24 @@ class TaskController extends Controller
         return $tasks;
     }
 
-    function add_task() // * Add param for new task
+    function add_task(string $new_task) 
     {
-        // & grab the current user
-        // & grab their tasks.
+        $user = new User;
+        $auth_user = Auth::user();
+        $user_entry = $user::find($auth_user);
+        $tasks = $user_entry[0]->tasks;
+        
+        $decoded_tasks = json_decode($tasks);
 
-        // & json_decode the json.
-        // & push param task to array.
-        // & json_encode the array back to json.
-        // & save to database.
+        $new_task_array = $decoded_tasks->array_push($new_task);
 
-        // & Return success or failure.
+        $new_encoded_array = json_encode($new_task_array);
 
+        $tasks = $new_encoded_array;
+
+        $user->save();
+
+        // * Not sure if this is going to work -> need to test it
 
     }
 
