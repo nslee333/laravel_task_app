@@ -30,7 +30,8 @@ class TaskController extends Controller
         
         $decoded_tasks = json_decode($tasks);
 
-        $new_task_array = $decoded_tasks->array_push($new_task);
+
+        $new_task_array = $decoded_tasks[] = $new_task;
 
         $new_encoded_array = json_encode($new_task_array);
 
