@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
 
         $task = "Do Laundry";
         
-        return App::call("TaskController@add_task", ["new_task" => $task]);
+        return App::call("App\Http\Controllers\TaskController@add_task", ["new_task" => $task]);
     });
     
     
