@@ -14,9 +14,9 @@ class TaskController extends Controller
 
         $auth_user = Auth::user();
 
-        $user_entry = $user::find($auth_user);
+        $user_entry = $user::find($auth_user)[0];
 
-        $tasks = $user_entry[0]->tasks;
+        $tasks = $user_entry->tasks;
 
         return $tasks;
     }
