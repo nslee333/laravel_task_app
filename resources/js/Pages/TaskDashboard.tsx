@@ -81,12 +81,24 @@ export default function TaskDashboard(jsonTasks: any, addTaskReq: any, getTasksR
     //     return newArr;
     // }
     
-    function addTask(draftParam: string) {
+    async function addTask(draftParam: string) {
         if (draftParam.length === 0) return;
 
         setDraft(draftParam);
 
-        // TODO Call add_task with draft
+        const response = await addTaskReq(draft);
+
+        if (response === Error) return Error(response);
+
+        setDraft("");
+
+        // TODO stopped here :)
+
+
+
+
+
+
 
         // TODO Call get_tasks after update.
 
@@ -94,7 +106,6 @@ export default function TaskDashboard(jsonTasks: any, addTaskReq: any, getTasksR
         // newArr.push(draftParam);
 
         // setTasks(newArr);
-        setDraft("");
     }
 
     function deleteTask(e: SyntheticEvent, index: number) {
