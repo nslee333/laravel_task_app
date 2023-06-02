@@ -32,22 +32,26 @@ class TaskController extends Controller
         $decoded_tasks[] = $new_task;
         $new_encoded_array = json_encode($decoded_tasks);
 
-        // $tasks = $new_encoded_array;
+        // $tasks = $new_encoded_array; // ? Why does this not work?
         $user_entry->tasks = $new_encoded_array;
 
         return $user_entry->save();
     }
 
-    function delete_task() // * index param -> task to be deleted.
+    function delete_task(int $task_index) // * index param -> task to be deleted.
     {
-        // & grab the current user.
-        // & grab their tasks.
+        $auth_user = Auth::user();
+        $user_entry = User::find($auth_user)[0];
+        $tasks = $user_entry->tasks;
 
-        // & json_decode the json.
-        // & delete the task from the tasks.
-        // & json_encode the array.
-        // & save to the database.
+        $decoded_tasks = json_decode($tasks);
 
-        // & return sucess or failure.
+        unset($decoded_tasks[$task_index]);
+
+        $encoded_tasks = json_encode($decoded_tasks);
+
+        $user_entry->tasks = $encoded_tasks;
+
+        $user_entry->save();
     }
 }

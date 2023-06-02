@@ -42,7 +42,11 @@ Route::middleware('auth')->group(function () {
     });
     
     
-    Route::delete("/tasks", [TaskController::class, 'delete_task'])->name("tasks.add");
+    Route::delete("/tasks", function (Request $request) {
+        $task_index = $request->input("task_index");
+
+        return App::call("App\Http\Controllers\TaskControler@delete_task", ["task_index" => $task_index]);
+    });
 });
 
 Route::get('/dashboard', function () {
