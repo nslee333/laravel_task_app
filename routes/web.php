@@ -30,25 +30,18 @@ Route::get('/', function () {
 
 })->middleware('auth');
 
-// ? this group of routes might be completely unnecessary.
-
-// ^ delete tasks => Need to pass task[index] to function.
-
 Route::middleware('auth')->group(function () {
-    Route::patch("/tasks", [TaskController::class, 'add_task'])->name("tasks.add");
+    
+    Route::post("/tasks", function() {
+        // & accept new_task here pass to -> taskcont::add_task()
 
-    // Route::delete("/tasks", [
-    //     data: {
-
-    //     }, 
-    //     TaskController::class, 'delete_task'
-    // ])->name("tasks.delete");
-
-    Route::delete("/tasks", function() {
-        $tasks = "Do Laundry";
-
-        return App::call("TaskController@add_task", ["tasks" => $tasks]);
+        $task = "Do Laundry";
+        
+        return App::call("TaskController@add_task", ["new_task" => $task]);
     });
+    
+    
+    Route::delete("/tasks", [TaskController::class, 'delete_task'])->name("tasks.add");
 });
 
 Route::get('/dashboard', function () {
