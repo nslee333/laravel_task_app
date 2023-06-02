@@ -23,23 +23,27 @@ class TaskController extends Controller
 
     function add_task(string $new_task) 
     {
-        $user = new User;
         $auth_user = Auth::user();
-        $user_entry = $user::find($auth_user);
-        $tasks = $user_entry[0]->tasks;
+        $user_entry = User::find($auth_user)[0];
+
+        // return $user_entry;
+
+        $tasks = $user_entry->tasks;
         
         $decoded_tasks = json_decode($tasks);
+        
+        
+        // * No errors now - but database isn't updating why? 
 
+        $decoded_tasks[] = $new_task;
 
-        $new_task_array = $decoded_tasks[] = $new_task;
-
-        $new_encoded_array = json_encode($new_task_array);
+        $new_encoded_array = json_encode($decoded_tasks);
 
         $tasks = $new_encoded_array;
 
-        $user->save();
+        return $user_entry->save(); // * <- true [1] returned? But not updating?
 
-        // * Not sure if this is going to work -> need to test it
+        // return $user_entry;
 
     }
 
