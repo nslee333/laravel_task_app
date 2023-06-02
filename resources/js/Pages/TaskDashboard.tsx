@@ -62,7 +62,7 @@ function Input(props: { addTask: any; draft: any; setDraft }) {
     );
 }
 
-export default function TaskDashboard(jsonTasks: any, addTaskReq: any, getTasksReq: any, deleteTaskReq: any) {
+export default function TaskDashboard(jsonTasks: any) {
 
     const parsedTasks = JSON.parse(jsonTasks.data)
 
