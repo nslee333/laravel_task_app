@@ -2,6 +2,7 @@ import { Link, Head } from "@inertiajs/react";
 import { Fragment, SyntheticEvent } from "react";
 import { useState } from "react";
 import { addTaskReq, getTasksReq, deleteTaskReq } from "./requests";
+import { AxiosError } from "axios";
 
 function DisplayTasks({ tasks, deleteTask }: { tasks: any; deleteTask: any }) {
     const displayTasks = tasks.map((element, index) => {
@@ -85,22 +86,40 @@ export default function TaskDashboard(jsonTasks: any) {
         if (draftParam.length === 0) return;
 
         setDraft(draftParam);
-
+        
         const response = await addTaskReq(draft);
 
-        if (response === Error) return Error(response);
+        if (response instanceof AxiosError) {
+            console.log(response);
+            console.log(response.response.data.message);
+            return response;
+        } else {
+            console.log(response);
+        }
 
+        
+
+        
+        const newTasksRes = await getTasksReq();
+        
+        if (newTasksRes instanceof AxiosError) {
+            console.log(newTasksRes);
+            console.log(newTasksRes.response.data.message);
+        } else {
+            console.log(newTasksRes);
+        }
+        
         setDraft("");
-
-        // TODO stopped here :)
-
+        setTasks(newTasksRes.data);
 
 
 
 
 
 
-        // TODO Call get_tasks after update.
+
+
+        // TODO IF  Call get_tasks after update IF react dosen't update.
 
         // const newArr = extractTasks();
         // newArr.push(draftParam);
