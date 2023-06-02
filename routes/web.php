@@ -31,7 +31,9 @@ Route::get('/', function () {
 
 })->middleware('auth');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () { 
+
+    Route::get("/tasks", [TaskController::class, 'get_tasks']);
     
     Route::post("/tasks", function(Request $request) {
         $task = $request->input('new_task');
