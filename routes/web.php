@@ -45,7 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::delete("/tasks", function (Request $request) {
         $task_index = $request->input("task_index");
 
-        return App::call("App\Http\Controllers\TaskControler@delete_task", ["task_index" => $task_index]);
+        return App::call("App\Http\Controllers\TaskController@delete_task", ["task_index" => $task_index]);
     });
 });
 
