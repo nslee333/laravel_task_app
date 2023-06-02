@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\App;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,10 +33,8 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     
-    Route::post("/tasks", function() {
-        // & accept new_task here pass to -> taskcont::add_task()
-
-        $task = "Do Laundry";
+    Route::post("/tasks", function(Request $request) {
+        $task = $request->input('new_task');
         
         return App::call("App\Http\Controllers\TaskController@add_task", ["new_task" => $task]);
     });
