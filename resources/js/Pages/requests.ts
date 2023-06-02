@@ -8,7 +8,7 @@ function getTasksReq() {
       return response;
     })
     .catch(function (error) {
-      return Error(error);
+      return error;
     });
 
   return getResponse;
@@ -23,7 +23,7 @@ function addTaskReq(newTask: string) {
       return response;
     })
     .catch(function (error)  {
-      return Error(error);
+      return error;
     });
 
     return addResponse;
@@ -38,7 +38,7 @@ function deleteTaskReq(taskIndex: number) {
       return response;
     })
     .catch(function (error) {
-      return Error(error);
+      return error;
     });
 
   return deleteResponse;
