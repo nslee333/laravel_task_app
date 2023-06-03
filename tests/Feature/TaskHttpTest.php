@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use App\Models\User;
 use Tests\TestCase;
 
-class TaskControllerTest extends TestCase
+class TaskHttpTest extends TestCase
 {
     /**
      * A basic feature test example.
