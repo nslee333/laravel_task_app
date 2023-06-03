@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +28,11 @@ Route::get('/', function () {
         'data' => $tasks
     ]);
 })->middleware('auth');
+
+Route::get("/logout", function () {
+    Auth::logout();
+    return redirect("/login");
+});
 
 
 Route::middleware('auth')->group(function () {

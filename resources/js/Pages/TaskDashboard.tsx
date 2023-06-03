@@ -73,7 +73,7 @@ export default function TaskDashboard(jsonData: any) {
             <div className="bg-[#3f3f3f] min-h-[100vh] text-white">
                 <Head title="Task Dashboard" />
                 <div className="h-[8rem] w-screen ">
-                    <Link href="/" className="">
+                    <Link href="/logout" className="">
                         Logout
                     </Link>
                 </div>
