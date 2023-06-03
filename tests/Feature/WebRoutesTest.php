@@ -26,7 +26,7 @@ class WebRoutesTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)
-                            ->get('/');
+            ->get('/');
 
         $response->assertOk();
     }
@@ -36,21 +36,21 @@ class WebRoutesTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)
-                            ->get('/');
+            ->get('/');
 
         $response->assertInertia(fn (Assert $page) => $page
-                    ->component('TaskDashboard'));
+            ->component('TaskDashboard'));
     }
-    
+
     public function test_logout_redirects_to_login(): void
     {
         $response = $this->get("logout");
-        
+
         $user = User::factory()->create();
-        
+
         $response = $this->actingAs($user)
-        ->get('/logout');
-        
+            ->get('/logout');
+
         $response->assertRedirect("/login");
     }
     public function test_dashboard_renders_an_inertia_component_dashboard(): void
@@ -58,9 +58,9 @@ class WebRoutesTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)
-                            ->get('/dashboard');
+            ->get('/dashboard');
 
         $response->assertInertia(fn (Assert $page) => $page
-                    ->component('Dashboard'));
+            ->component('Dashboard'));
     }
 }

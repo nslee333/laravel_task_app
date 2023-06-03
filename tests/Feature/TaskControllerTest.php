@@ -22,7 +22,7 @@ class TaskControllerTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)
-                            ->get('/tasks');
+            ->get('/tasks');
 
         $response->assertOk();
     }
@@ -32,8 +32,8 @@ class TaskControllerTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)
-                            ->get('/tasks');
-                            
+            ->get('/tasks');
+
         $this->assertJson($response->original);
     }
 
@@ -42,9 +42,9 @@ class TaskControllerTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)
-                        ->get('/tasks');
+            ->get('/tasks');
 
-        
+
         $data = json_decode($response->original);
 
         $this->assertContains("Mow the lawn", $data);
@@ -55,10 +55,10 @@ class TaskControllerTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)
-                        ->post('/tasks', ['new_task' => 'Wash the dishes']);
+            ->post('/tasks', ['new_task' => 'Wash the dishes']);
 
-    
-       $response->assertOk();
+
+        $response->assertOk();
     }
 
     public function test_delete_task_returns_200(): void
@@ -66,10 +66,8 @@ class TaskControllerTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)
-                        ->delete('/tasks', ['task_index' => 0]);
+            ->delete('/tasks', ['task_index' => 0]);
 
-       $response->assertOk();
+        $response->assertOk();
     }
-
-    
 }
