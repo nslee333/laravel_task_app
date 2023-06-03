@@ -10,14 +10,10 @@ export default function TaskDashboard(jsonData: any) {
     
     const parsedTasks = JSON.parse(jsonData.data);
     const taskArray = Object.values(parsedTasks); 
-    const [disabled, setDisabled] = useState(false);
-    // const parsedTasks = jsonData.data;
-    // console.log(parsedTasks)
-    // console.log(taskArray)
     
     const [tasks, setTasks] = useState(taskArray);
-    // const [tasks, setTasks] = useState(parsedTasks);
     const [draft, setDraft] = useState("");
+    const [disabled, setDisabled] = useState(false);
     
     async function addTask(draftParam: string) {
         if (draftParam.length === 0) return;
@@ -69,9 +65,8 @@ export default function TaskDashboard(jsonData: any) {
             console.log(getRes);
         }
 
-        const taskArr = Object.values(getRes.data); // ! BandAID!!!! 
+        const taskArr = Object.values(getRes.data); 
         
-        // setTasks(getRes.data);  // ! BANDAID
         setTasks(taskArr);
         setDisabled(false);
     }
