@@ -51,4 +51,17 @@ class TaskControllerTest extends TestCase
 
         $this->assertContains("Mow the lawn", $data);
     }
+
+    public function test_add_task_returns_200(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)
+                        ->post('/tasks', ['new_task' => 'Wash the dishes']);
+
+    
+       $response->assertStatus(200);
+    }
+
+    
 }
