@@ -10,6 +10,7 @@ export default function TaskDashboard(jsonData: any) {
     
     const parsedTasks = JSON.parse(jsonData.data);
     const taskArray = Object.values(parsedTasks); 
+    const [disabled, setDisabled] = useState(false);
     // const parsedTasks = jsonData.data;
     // console.log(parsedTasks)
     // console.log(taskArray)
@@ -47,6 +48,7 @@ export default function TaskDashboard(jsonData: any) {
     }
 
     async function deleteTask(e: SyntheticEvent, index: number) {
+        setDisabled(true);
         e.preventDefault();
         
         const deleteRes = await deleteTaskReq(index);
@@ -71,6 +73,7 @@ export default function TaskDashboard(jsonData: any) {
         
         // setTasks(getRes.data);  // ! BANDAID
         setTasks(taskArr);
+        setDisabled(false);
     }
     
     
@@ -91,7 +94,7 @@ export default function TaskDashboard(jsonData: any) {
                             draft={draft}
                             setDraft={setDraft}
                             />
-                        <DisplayTasks tasks={tasks} deleteTask={deleteTask} />
+                        <DisplayTasks tasks={tasks} deleteTask={deleteTask} disabled={disabled} />
                     </div>
                 </div>
             </div>
@@ -136,7 +139,7 @@ function Input(props: { addTask: any; draft: any; setDraft }) {
 }
 
 
-function DisplayTasks({ tasks, deleteTask }: { tasks: any; deleteTask: any }) {
+function DisplayTasks({ tasks, deleteTask, disabled }: { tasks: any; deleteTask: any, disabled: any }) {
     const displayTasks = tasks.map((element, index) => {
         if (!tasks) return;
 
@@ -144,7 +147,7 @@ function DisplayTasks({ tasks, deleteTask }: { tasks: any; deleteTask: any }) {
             <Fragment key={index}>
                 <div className="flex justify-between sm:text-3xl xs:text-sm">
                     <div>{tasks[index]}</div>
-                    <button onClick={(e) => deleteTask(e, index)}>
+                    <button disabled={disabled}onClick={(e) => deleteTask(e, index)}>
                         &times;
                     </button>
                 </div>
