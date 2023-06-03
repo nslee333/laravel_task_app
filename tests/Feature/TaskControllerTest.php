@@ -18,6 +18,7 @@ class TaskControllerTest extends TestCase
 
         $response->assertStatus(302);
     }
+
     public function test_get_tasks_returns_200_if_authenticated(): void
     {
         $user = User::factory()->create();
@@ -26,5 +27,28 @@ class TaskControllerTest extends TestCase
                             ->get('/tasks');
 
         $response->assertStatus(200);
+    }
+
+    public function test_get_tasks_returns_json_object(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)
+                            ->get('/tasks');
+                            
+        $this->assertJson($response->original);
+    }
+
+    public function test_get_tasks_contains_initial_task(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)
+                        ->get('/tasks');
+
+        
+        $data = json_decode($response->original);
+
+        $this->assertContains("Mow the lawn", $data);
     }
 }
