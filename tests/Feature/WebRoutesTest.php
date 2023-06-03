@@ -28,7 +28,7 @@ class WebRoutesTest extends TestCase
         $response = $this->actingAs($user)
                             ->get('/');
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_homepage_renders_an_inertia_component_task_dashboard(): void

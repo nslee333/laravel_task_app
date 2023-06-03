@@ -24,7 +24,7 @@ class TaskControllerTest extends TestCase
         $response = $this->actingAs($user)
                             ->get('/tasks');
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_get_tasks_returns_json_object(): void
@@ -58,7 +58,7 @@ class TaskControllerTest extends TestCase
                         ->post('/tasks', ['new_task' => 'Wash the dishes']);
 
     
-       $response->assertStatus(200);
+       $response->assertOk();
     }
 
     public function test_delete_task_returns_200(): void
@@ -68,7 +68,7 @@ class TaskControllerTest extends TestCase
         $response = $this->actingAs($user)
                         ->delete('/tasks', ['task_index' => 0]);
 
-       $response->assertStatus(200);
+       $response->assertOk();
     }
 
     
