@@ -34,7 +34,6 @@ Route::get("/logout", function () {
     return redirect("/login");
 });
 
-
 Route::middleware('auth')->group(function () {
 
     Route::get("/tasks", [TaskController::class, 'get_tasks']);
