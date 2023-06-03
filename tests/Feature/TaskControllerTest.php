@@ -2,8 +2,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use App\Models\User;
 use Tests\TestCase;
 
@@ -60,6 +58,16 @@ class TaskControllerTest extends TestCase
                         ->post('/tasks', ['new_task' => 'Wash the dishes']);
 
     
+       $response->assertStatus(200);
+    }
+
+    public function test_delete_task_returns_200(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)
+                        ->delete('/tasks', ['task_index' => 0]);
+
        $response->assertStatus(200);
     }
 
