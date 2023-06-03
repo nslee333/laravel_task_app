@@ -24,7 +24,7 @@ export default function TaskDashboard(jsonData: any) {
             console.log(response.response.data.message);
             return response;
         } else {
-            console.log(response);
+            // console.log(response);
         }
 
         const newTasksRes = await getTasksReq();
@@ -33,7 +33,7 @@ export default function TaskDashboard(jsonData: any) {
             console.log(newTasksRes);
             console.log(newTasksRes.response.data.message);
         } else {
-            console.log(newTasksRes);
+            // console.log(newTasksRes);
         }
 
         setDraft("");
@@ -50,7 +50,7 @@ export default function TaskDashboard(jsonData: any) {
             console.log(deleteRes);
             console.log(deleteRes.response.data.message);
         } else {
-            console.log(deleteRes);
+            // console.log(deleteRes);
         }
 
         const getRes = await getTasksReq();
@@ -59,7 +59,7 @@ export default function TaskDashboard(jsonData: any) {
             console.log(getRes);
             console.log(getRes.response.data.message);
         } else {
-            console.log(getRes);
+            // console.log(getRes);
         }
 
         const taskArr = Object.values(getRes.data);
