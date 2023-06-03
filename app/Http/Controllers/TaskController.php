@@ -10,11 +10,9 @@ class TaskController extends Controller
 {
     function get_tasks(): string
     {
-        $user = new User;
-
         $auth_user = Auth::user();
 
-        $user_entry = $user::find($auth_user)[0];
+        $user_entry = User::find($auth_user)[0];
 
         $tasks = $user_entry->tasks;
 
