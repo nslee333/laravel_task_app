@@ -4,24 +4,21 @@ import { useState } from "react";
 import { addTaskReq, getTasksReq, deleteTaskReq } from "./requests";
 import { AxiosError } from "axios";
 
-
-
 export default function TaskDashboard(jsonData: any) {
-    
     const parsedTasks = JSON.parse(jsonData.data);
-    const taskArray = Object.values(parsedTasks); 
-    
+    const taskArray = Object.values(parsedTasks);
+
     const [tasks, setTasks] = useState(taskArray);
     const [draft, setDraft] = useState("");
     const [disabled, setDisabled] = useState(false);
-    
+
     async function addTask(draftParam: string) {
         if (draftParam.length === 0) return;
 
         setDraft(draftParam);
-        
+
         const response = await addTaskReq(draft);
-        
+
         if (response instanceof AxiosError) {
             console.log(response);
             console.log(response.response.data.message);
@@ -29,16 +26,16 @@ export default function TaskDashboard(jsonData: any) {
         } else {
             console.log(response);
         }
-        
+
         const newTasksRes = await getTasksReq();
-        
+
         if (newTasksRes instanceof AxiosError) {
             console.log(newTasksRes);
             console.log(newTasksRes.response.data.message);
         } else {
             console.log(newTasksRes);
         }
-        
+
         setDraft("");
         setTasks(newTasksRes.data);
     }
@@ -46,9 +43,9 @@ export default function TaskDashboard(jsonData: any) {
     async function deleteTask(e: SyntheticEvent, index: number) {
         setDisabled(true);
         e.preventDefault();
-        
+
         const deleteRes = await deleteTaskReq(index);
-        
+
         if (deleteRes instanceof AxiosError) {
             console.log(deleteRes);
             console.log(deleteRes.response.data.message);
@@ -57,7 +54,7 @@ export default function TaskDashboard(jsonData: any) {
         }
 
         const getRes = await getTasksReq();
-        
+
         if (getRes instanceof AxiosError) {
             console.log(getRes);
             console.log(getRes.response.data.message);
@@ -65,13 +62,12 @@ export default function TaskDashboard(jsonData: any) {
             console.log(getRes);
         }
 
-        const taskArr = Object.values(getRes.data); 
-        
+        const taskArr = Object.values(getRes.data);
+
         setTasks(taskArr);
         setDisabled(false);
     }
-    
-    
+
     return (
         <div>
             <div className="bg-[#3f3f3f] min-h-[100vh] text-white">
@@ -88,8 +84,12 @@ export default function TaskDashboard(jsonData: any) {
                             addTask={addTask}
                             draft={draft}
                             setDraft={setDraft}
-                            />
-                        <DisplayTasks tasks={tasks} deleteTask={deleteTask} disabled={disabled} />
+                        />
+                        <DisplayTasks
+                            tasks={tasks}
+                            deleteTask={deleteTask}
+                            disabled={disabled}
+                        />
                     </div>
                 </div>
             </div>
@@ -133,8 +133,15 @@ function Input(props: { addTask: any; draft: any; setDraft }) {
     );
 }
 
-
-function DisplayTasks({ tasks, deleteTask, disabled }: { tasks: any; deleteTask: any, disabled: any }) {
+function DisplayTasks({
+    tasks,
+    deleteTask,
+    disabled,
+}: {
+    tasks: any;
+    deleteTask: any;
+    disabled: any;
+}) {
     const displayTasks = tasks.map((element, index) => {
         if (!tasks) return;
 
@@ -142,7 +149,10 @@ function DisplayTasks({ tasks, deleteTask, disabled }: { tasks: any; deleteTask:
             <Fragment key={index}>
                 <div className="flex justify-between sm:text-3xl xs:text-sm">
                     <div>{tasks[index]}</div>
-                    <button disabled={disabled}onClick={(e) => deleteTask(e, index)}>
+                    <button
+                        disabled={disabled}
+                        onClick={(e) => deleteTask(e, index)}
+                    >
                         &times;
                     </button>
                 </div>
