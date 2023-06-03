@@ -1,5 +1,4 @@
 import axios from "axios";
-import { AxiosResponse, AxiosError } from "axios";
 
 async function getTasksReq() {
     const getResponse = await axios
