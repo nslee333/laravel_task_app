@@ -8,7 +8,7 @@ use App\Models\User;
 
 class TaskController extends Controller
 {
-    function get_tasks()
+    function get_tasks(): string
     {
         $user = new User;
 
@@ -21,7 +21,7 @@ class TaskController extends Controller
         return $tasks;
     }
 
-    function add_task(string $new_task) 
+    function add_task(string $new_task): void
     {
         $auth_user = Auth::user();
         $user_entry = User::find($auth_user)[0];
@@ -33,10 +33,10 @@ class TaskController extends Controller
         
         $user_entry->tasks = $decoded_tasks;
 
-        return $user_entry->save();
+        $user_entry->save();
     }
 
-    function delete_task(mixed $task_index)
+    function delete_task(mixed $task_index): void
     {
         $auth_user = Auth::user();
         $user_entry = User::find($auth_user)[0];
