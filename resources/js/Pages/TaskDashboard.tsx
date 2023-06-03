@@ -78,8 +78,19 @@ export default function TaskDashboard(jsonData: any) {
                     </Link>
                 </div>
 
-                <div className=" flex justify-center">
-                    <div className="bg-[#222] h-[80vh] overflow-auto sm:w-1/2 xs:w-7/8 rounded-md p-5 mb-10 border-2 border-pink-500">
+                <div className="flex justify-center">
+                    <div className="bg-[#222] 
+                                    h-[80vh] 
+                                    overflow-auto 
+                                    sm:w-1/2 
+                                    xs:w-7/8 
+                                    rounded-md 
+                                    p-5 
+                                    mb-10 
+                                    border-2 
+                                    border-pink-500
+                                    "
+                    >
                         <Input
                             addTask={addTask}
                             draft={draft}
@@ -119,9 +130,7 @@ function Input(props: { addTask: any; draft: any; setDraft }) {
                                 w-[100%] 
                                 text-2xl 
                                 rounded-md 
-                                mb-5
-                
-                "
+                                mb-5"
                     id="task"
                     type="text"
                     placeholder="get bailey leaves..."
