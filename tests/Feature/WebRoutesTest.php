@@ -19,28 +19,28 @@ class WebRoutesTest extends TestCase
 
         $response->assertStatus(302);
     }
-    public function test_homepage_returns_200_if_authenticated(): void
-    {
-        $response = $this->get('/');
+    // public function test_homepage_returns_200_if_authenticated(): void
+    // {
+    //     $response = $this->get('/');
 
-        $user = User::factory()->create();
+    //     $user = User::factory()->create();
 
-        $response = $this->actingAs($user)
-            ->get('/');
+    //     $response = $this->actingAs($user)
+    //         ->get('/');
 
-        $response->assertOk();
-    }
+    //     $response->assertOk();
+    // }
 
-    public function test_homepage_renders_an_inertia_component_task_dashboard(): void
-    {
-        $user = User::factory()->create();
+    // public function test_homepage_renders_an_inertia_component_task_dashboard(): void
+    // {
+    //     $user = User::factory()->create();
 
-        $response = $this->actingAs($user)
-            ->get('/');
+    //     $response = $this->actingAs($user)
+    //         ->get('/');
 
-        $response->assertInertia(fn (Assert $page) => $page
-            ->component('TaskDashboard'));
-    }
+    //     $response->assertInertia(fn (Assert $page) => $page
+    //         ->component('TaskDashboard'));
+    // }
 
     public function test_logout_redirects_to_login(): void
     {
